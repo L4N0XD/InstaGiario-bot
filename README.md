@@ -1,5 +1,5 @@
 # InstaGlowUp
- This is a code that automates writing letter by letter and posting comments for instagram.
+ This is a code that automates writing letter by letter and posting comments for instagram. 
  
 # Written in Python, we use the modules:
 
@@ -13,6 +13,8 @@ I used the webdriver for microsoft edge, available at:
 https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/
 Select your version and download.
 This driver needs to be in the python path or InstaGlowUp.py path.
+
+# Before Run
 
 *On line 66 enter your list of comments as shown in the code example.*
 
