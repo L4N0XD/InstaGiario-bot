@@ -1,20 +1,25 @@
 from tkinter import E
-from random import choice, randint
+from random import choice, randint, random
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By  
 from time import sleep
+import random
 import warnings
 with warnings.catch_warnings():
     warnings.filterwarnings("ignore",category=DeprecationWarning)
-
 
 class InstaGlowUpBot:
     def __init__(self, user, passw):
         self.username = user
         self.password = passw
-        self.driver = webdriver.Edge()
+        user_agent_list = ["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36/8mqULwuL-67", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36/8mqPtVuL-9", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36 Agency/90.8.1597.98", "Mozilla/5.0 (Windows NT 10.0; WOW64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4870.181 Safari/537.36", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36/8mqEpSuL-47", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36/0cqIF4Ef-13", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4859.172 Safari/537.36", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0. 4844.82 Safari/537.36", "Mozilla/5.0 (Windows NT 10.0; WOW64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4864.133 Safari/537.36", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36", "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; Xbox; Xbox One) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/0ADF80FA", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2700.0 Safari/537.36", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84 Safari/537.36", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2696.0 Safari/537.36", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4698.0 Safari/537.36", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.81 Safari/537.36 GLS/97.10.6229.30", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36 Config/95.2.8641.42", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36 AtContent/93.5.2274.75", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36 Config/96.2.9111.12", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36 GLS/95.10.1539.40", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.80 Safari/537.36/8mqXoXuL-32", "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.114 Safari/537.36", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36(KHTML,likeGecko) Chrome/98.0.4758.82 Safari/537.36", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.9 Safari/537.36", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4753.0 Safari/537.36"]
+        user_agent = random.choice(user_agent_list)
+        options = webdriver.ChromeOptions()
+        # specify the desired user agent
+        options.add_argument(f'user-agent={user_agent}')
+        self.driver = webdriver.Chrome(chrome_options=options)
        
     def login(self):
         driver = self.driver
@@ -81,22 +86,21 @@ class InstaGlowUpBot:
                 sleep(randint(3, 9))
 
                 driver.find_element(By.CLASS_NAME, "_aacl._aaco._aacw._aad0._aad6._aade").click() # Publica a postagem.
-                sleep(randint(1, 1))
+                sleep(randint(1, 2))
                 try: 
-                    driver.find_element(By.CLASS_NAME, "_abmp") # Procura possivel bloqueio 
+                    driver.find_element(By.XPATH, "//p[@class='_abmp']") # Procura possivel bloqueio
                     print('Possivel bloqueio detectado.')
                     encerrar = int(input('Deseja tentar novamente? (1)Sim (2)Não: '))
                     if (encerrar == 1):
                         driver.find_element(By.CLASS_NAME, "_aacl._aaco._aacw._aad0._aad6._aade").click() # Publica a postagem.
-                        sleep(randint(1, 1))
+                        sleep(randint(1, 2))
                         try: 
-                            driver.find_element(By.CLASS_NAME, "_abmp") # Procura possivel bloqueio novamente após tentar novamente publicar.
+                            driver.find_element(By.XPATH, "//p[@class='_abmp']") # Procura possivel bloqueio novamente após tentar novamente publicar.
                             print('Bloqueio detectado!\nEncerrando programa!') # Se encotrado bloqueio após segunda tentativa, encerra o programa.
                             driver.close()
                             exit()
                         except NoSuchElementException:
                             print(f'Comentários postados: {u}')
-
                     else:
                         print ('Encerrando programa!')   
                         driver.close()
@@ -125,16 +129,16 @@ class InstaGlowUpBot:
                 sleep(randint(4, 10)) 
                 
                 driver.find_element(By.CLASS_NAME, "_aacl._aaco._aacw._aad0._aad6._aade").click() # Publica a postagem.
-                sleep(randint(1, 1))
+                sleep(randint(1, 2))
                 try: 
-                    driver.find_element(By.CLASS_NAME, "_abmp")
+                    driver.find_element(By.XPATH, "//p[@class='_abmp']")
                     print('Possivel bloqueio detectado.\n Encerrando programa!')
                     encerrar = int(input('Deseja tentar novamente? (1)Sim (2)Não: '))
                     if (encerrar == 1):
                         driver.find_element(By.CLASS_NAME, "_aacl._aaco._aacw._aad0._aad6._aade").click() # Publica a postagem.
-                        sleep(randint(1, 1))
+                        sleep(randint(1, 2))
                         try: 
-                            driver.find_element(By.CLASS_NAME, "_abmp") # Procura possivel bloqueio novamente após tentar novamente publicar.
+                            driver.find_element(By.XPATH, "//p[@class='_abmp']") # Procura possivel bloqueio após tentar novamente.
                             print('Bloqueio detectado!\nEncerrando programa!') # Se encotrado bloqueio após segunda tentativa, encerra o programa.
                             driver.close()
                             exit()
