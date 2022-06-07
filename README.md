@@ -4,7 +4,7 @@
 # Written in Python, we use the modules:
 
 Tkinter:
-(pip install tkinter)
+(pip install tk)
 
 Selenium-Webdriver:
 (pip install selenium)
